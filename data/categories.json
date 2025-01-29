@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Pakaian Lengan Panjang",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "name": "Pakaian Lengan Pendek",
+    "userId": 2
+  },
+  {
+    "id": 3,
+    "name": "Pakaian International",
+    "userId": 3
+  },
+  {
+    "id": 4,
+    "name": "Pakaian Santai",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "name": "Pakaian Seragam",
+    "userId": 2
+  }
+]

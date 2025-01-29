@@ -1,0 +1,14 @@
+npm init -y
+npm i express sequelize bcryptjs pg >>> untuk memunculkan file package dan node_modules
+npm i -D sequelize-cli nodemon
+touch .gitignore >>> node_modules
+npx sequelize init >>> untuk memunculkan folder config, migrations, models, seeders
+ubah dahulu config dengan menyesuaikan ya!
+
+mengubah branch
+cd /c/Users/Vrman/phase2/week3/day2/iProject
+ls -la
+git init >>> karena tidak ada file .git didalamnya setelah dicek
+git checkout -b syakira-baby-store
+git branch >>> untuk memastikan bahwa branch telah berubah
+
