@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export default function ProfilePage() {
     const [user, setUser] = useState(null);
@@ -76,11 +76,8 @@ export default function ProfilePage() {
             // Update local user state
             setUser(prevUser => ({ ...prevUser, picture: data.picture }));
             setSelectedFile(null);
-
-            alert('Profile picture updated successfully!');
         } catch (error) {
             console.error('Error updating profile picture:', error);
-            alert('Failed to update profile picture');
         }
     };
 
