@@ -26,7 +26,7 @@ export default function Navbar() {
 
             if (token) {
                 try {
-                    const { data } = await axios.get('http://localhost:3000/user/profile', {
+                    const { data } = await axios.get('https://firmanz.tech/user/profile', {
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     setUserProfile(data.user);

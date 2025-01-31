@@ -10,7 +10,7 @@ export default function FavoritePage() {
     async function fetchFavorites() {
         try {
             setLoading(true);
-            const { data } = await axios.get('http://localhost:3000/favorite', {
+            const { data } = await axios.get('https://firmanz.tech/favorite', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }

@@ -1,9 +1,9 @@
 import Card from '../components/Card';
-import { products } from '../data/constans';
 import { motion } from 'framer-motion';
 import Recommendation from '../components/Recommendation';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../features/products/products-slice';
 
 const container = {
     hidden: { opacity: 0 },
@@ -21,28 +21,16 @@ const item = {
 };
 
 export default function HomePage() {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(false)
-
-    async function fetchData() {
-        try {
-            setLoading(true)
-            const {data} = await axios.get('http://localhost:3000/products')
-
-            console.log(data, '<<<<<<<<<')
-            setProducts(data.product)
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }finally {
-            setLoading(false)
-        }
-    }
+    const dispatch = useDispatch();
+    const { products, loading, error } = useSelector(state => state.products);
 
     useEffect(() => {
-        fetchData()
-    }, [])
+        dispatch(fetchProducts());
+    }, [dispatch]);
 
-    if (loading) return <div>Loading...</div>
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
     return (
         <div>
             {/* Hero Banner */}
@@ -107,7 +95,6 @@ export default function HomePage() {
             </div>
 
             {/* Products */}
-            {loading ? (<div>Loading...</div>) : (
             <div className="bg-gray-50 py-16">
                 <div className="max-w-7xl mx-auto px-4">
                     <motion.h2 
@@ -131,8 +118,6 @@ export default function HomePage() {
                     </motion.div>
                 </div>
             </div>
-                
-            )}
 
             {/* Features */}
             <div className="bg-white py-16">

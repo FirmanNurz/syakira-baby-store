@@ -6,61 +6,35 @@ import { GoogleLogin } from '@react-oauth/google';
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            setError(null);
-            const {data} = await axios.post('http://localhost:3000/user/login', {
+            const {data} = await axios.post('https://firmanz.tech/user/login', {
                 email,
                 password
             });
 
             localStorage.setItem('accessToken', data.accessToken);
-            
-            // Dispatch custom event for auth state change
-            window.dispatchEvent(new Event('authStateChanged'));
-            
             navigate('/');
         } catch (error) {
             console.error('Error logging in:', error);
-            setError(error.response?.data?.message || 'Login failed. Please try again.');
         }
     }
 
     async function googleLogin(codeResponse) {
+        console.log('Google login response:', codeResponse);
+        
         try {
-            // Log the entire response for debugging
-            console.log('Full Google login response:', codeResponse);
-            
-            // Ensure we're using the credential from the response
-            const googleCredential = codeResponse.credential;
-            
-            if (!googleCredential) {
-                throw new Error('No Google credential found');
-            }
-
-            const {data} = await axios.post('http://localhost:3000/user/google-login', 
-                { token: googleCredential },
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
+            const {data} = await axios.post('https://firmanz.tech/user/google-login', null, {
+                headers: { token: codeResponse.credential },
+            });
 
             localStorage.setItem('accessToken', data.accessToken);
-            
-            // Dispatch custom event for auth state change
-            window.dispatchEvent(new Event('authStateChanged'));
-            
-            
             navigate('/');
         } catch (error) {
             console.error('Error logging in with Google:', error);
-            setError(error.response?.data?.message || 'Google login failed. Please try again.');
         }
     }
 
@@ -91,13 +65,6 @@ export default function LoginPage() {
                             </Link>
                         </p>
                     </div>
-
-                    {/* Error Message */}
-                    {error && (
-                        <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                            <span className="block sm:inline">{error}</span>
-                        </div>
-                    )}
 
                     {/* Login Form */}
                     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -154,10 +121,6 @@ export default function LoginPage() {
                     <div className="flex justify-center">
                         <GoogleLogin 
                             onSuccess={googleLogin}
-                            onError={() => {
-                                setError('Google login failed. Please try again.');
-                                console.error('Google login failed');
-                            }}
                             theme="outline"
                             size="large"
                             text="signin_with"

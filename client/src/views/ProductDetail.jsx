@@ -13,14 +13,14 @@ export default function ProductDetail() {
     async function fetchData() {
         try {
             setLoading(true)
-            const {data} = await axios.get(`http://localhost:3000/products/${id}`)
+            const {data} = await axios.get(`https://firmanz.tech/products/${id}`)
     
             setProduct(data.product)
             
             // Check if product is already in favorites
             const token = localStorage.getItem('accessToken')
             if (token) {
-                const favResponse = await axios.get('http://localhost:3000/favorite', {
+                const favResponse = await axios.get('https://firmanz.tech/favorite', {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 const favorites = favResponse.data.favorites
@@ -48,19 +48,19 @@ export default function ProductDetail() {
 
             if (isFavorite) {
                 // Find the favorite ID to delete
-                const favResponse = await axios.get('http://localhost:3000/favorite', {
+                const favResponse = await axios.get('https://firmanz.tech/favorite', {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 const favorite = favResponse.data.favorites.find(fav => fav.productId === product.id)
                 
                 if (favorite) {
-                    await axios.delete(`http://localhost:3000/favorite/${favorite.id}`, {
+                    await axios.delete(`https://firmanz.tech/favorite/${favorite.id}`, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                     setIsFavorite(false)
                 }
             } else {
-                await axios.post('http://localhost:3000/favorite', 
+                await axios.post('https://firmanz.tech/favorite', 
                     { productId: product.id }, 
                     { headers: { Authorization: `Bearer ${token}` } }
                 )
