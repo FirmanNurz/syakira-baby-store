@@ -1,0 +1,26 @@
+[
+    {
+      "name": "Sarah Anderson",
+      "picture": "https://example.com/sarah.jpg",
+      "email": "sarah@mail.com",
+      "password": "123456"
+    },
+    {
+      "name": "Michael Wong",
+      "picture": "https://example.com/michael.jpg",
+      "email": "michael@mail.com",
+      "password": "234561"
+    },
+    {
+      "name": "Lisa Kusuma", 
+      "picture": "https://example.com/lisa.jpg",
+      "email": "lisa@mail.com",
+      "password": "345612"
+    },
+    {
+      "name": "Budi Santoso",
+      "picture": "https://example.com/budi.jpg",
+      "email": "budi@mail.com", 
+      "password": "456123"
+    }
+  ]
