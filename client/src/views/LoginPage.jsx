@@ -33,6 +33,7 @@ export default function LoginPage() {
             });
 
             localStorage.setItem('accessToken', data.accessToken);
+            window.dispatchEvent(new Event('authStateChanged'));
             navigate('/');
         } catch (error) {
             console.error('Error logging in with Google:', error);
