@@ -40,7 +40,7 @@ export const fetchProducts = () => async (dispatch) => {
   try {
     dispatch(fetchPending());
 
-    const { data } = await axios.get("http://localhost:3000/products");
+    const { data } = await axios.get("https://syakira-baby-store.firmanz.tech/products");
 
     dispatch(fetchSuccess(data.product));
   } catch (error) {

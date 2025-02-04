@@ -26,7 +26,7 @@ export default function Recommendations() {
 
     const fetchRecommendations = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/products/gemini');
+            const response = await axios.get('https://syakira-baby-store.firmanz.tech/products/gemini');
             // Flatten all products from all categories into a single array
             const allProducts = response.data.text.products.flatMap(category => category.items);
             

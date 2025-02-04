@@ -31,7 +31,7 @@ export default function RegisterPage() {
 
         try {
             setLoading(true);
-            const { data } = await axios.post('http://localhost:3000/user/register', {
+            const { data } = await axios.post('https://syakira-baby-store.firmanz.tech/user/register', {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password

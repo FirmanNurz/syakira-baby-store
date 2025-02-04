@@ -11,7 +11,7 @@ export default function LoginPage() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const {data} = await axios.post('http://localhost:3000/user/login', {
+            const {data} = await axios.post('https://syakira-baby-store.firmanz.tech/user/login', {
                 email,
                 password
             });
@@ -28,7 +28,7 @@ export default function LoginPage() {
         console.log('Google login response:', codeResponse);
         
         try {
-            const {data} = await axios.post('http://localhost:3000/user/google-login', null, {
+            const {data} = await axios.post('https://syakira-baby-store.firmanz.tech/user/google-login', null, {
                 headers: { token: codeResponse.credential },
             });
 
