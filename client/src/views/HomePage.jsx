@@ -110,7 +110,7 @@ export default function HomePage() {
                         whileInView="show"
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                     >
-                        {products.map((product) => (
+                        {products.length > 0 && products?.map((product) => (
                             <motion.div key={product.id} variants={item}>
                                 <Card product={product} />
                             </motion.div>

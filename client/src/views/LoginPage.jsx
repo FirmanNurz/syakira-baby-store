@@ -11,12 +11,13 @@ export default function LoginPage() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const {data} = await axios.post('https://firmanz.tech/user/login', {
+            const {data} = await axios.post('http://localhost:3000/user/login', {
                 email,
                 password
             });
 
             localStorage.setItem('accessToken', data.accessToken);
+            window.dispatchEvent(new Event('authStateChanged'));
             navigate('/');
         } catch (error) {
             console.error('Error logging in:', error);
@@ -27,7 +28,7 @@ export default function LoginPage() {
         console.log('Google login response:', codeResponse);
         
         try {
-            const {data} = await axios.post('https://firmanz.tech/user/google-login', null, {
+            const {data} = await axios.post('http://localhost:3000/user/google-login', null, {
                 headers: { token: codeResponse.credential },
             });
 

@@ -12,7 +12,6 @@ export default function Navbar() {
         setAccessToken(null);
         setUserProfile(null);
         
-        // Dispatch custom event for logout
         window.dispatchEvent(new Event('authStateChanged'));
         
         navigate('/login');
@@ -26,7 +25,7 @@ export default function Navbar() {
 
             if (token) {
                 try {
-                    const { data } = await axios.get('https://firmanz.tech/user/profile', {
+                    const { data } = await axios.get('http://localhost:3000/user/profile', {
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     setUserProfile(data.user);
@@ -45,7 +44,6 @@ export default function Navbar() {
         // Initial token check
         updateAccessToken();
 
-        // Cleanup event listener
         return () => {
             window.removeEventListener('authStateChanged', updateAccessToken);
         };

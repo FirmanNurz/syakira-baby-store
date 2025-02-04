@@ -7,7 +7,7 @@ class ProductController {
         try {
             const { search } = req.query
 
-            let where = {}
+            let where = {};
             if (search) {
                 where.name = {
                     [Op.iLike]: `%${search}%`
@@ -21,6 +21,8 @@ class ProductController {
             })
 
         } catch (err) {
+            console.log(err, "di product getAll");
+            
             next(err)
         }
     }

@@ -29,7 +29,7 @@ export default function Card({ product }) {
             try {
                 const token = localStorage.getItem('accessToken')
                 if (token && id) {
-                    const favResponse = await axios.get('https://firmanz.tech/favorite', {
+                    const favResponse = await axios.get('http://localhost:3000/favorite', {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                     const favorites = favResponse.data.favorites
@@ -59,19 +59,19 @@ export default function Card({ product }) {
 
             if (isFavorite) {
                 // Find the favorite ID to delete
-                const favResponse = await axios.get('https://firmanz.tech/favorite', {
+                const favResponse = await axios.get('http://localhost:3000/favorite', {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 const favorite = favResponse.data.favorites.find(fav => fav.Product.id === id)
                 
                 if (favorite) {
-                    await axios.delete(`https://firmanz.tech/favorite/${favorite.id}`, {
+                    await axios.delete(`http://localhost:3000/favorite/${favorite.id}`, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                     setIsFavorite(false)
                 }
             } else {
-                await axios.post('https://firmanz.tech/favorite', 
+                await axios.post('http://localhost:3000/favorite', 
                     { ProductId: id }, 
                     { headers: { Authorization: `Bearer ${token}` } }
                 )

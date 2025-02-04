@@ -24,27 +24,27 @@ export default function Recommendations() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchRecommendations = async () => {
-            try {
-                const response = await axios.get('https://firmanz.tech/products/gemini');
-                // Flatten all products from all categories into a single array
-                const allProducts = response.data.text.products.flatMap(category => category.items);
-                
-                // Get 3 random products from the flattened array
-                const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
-                const selected = shuffled.slice(0, 3);
-                
-                setRecommendedProducts(selected);
-                setTitle(response.data.text.recommendation);
-                setLoading(false);
-            } catch (err) {
-                console.error('Error fetching recommendations:', err);
-                setError('Failed to fetch recommendations');
-                setLoading(false);
-            }
-        };
+    const fetchRecommendations = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/products/gemini');
+            // Flatten all products from all categories into a single array
+            const allProducts = response.data.text.products.flatMap(category => category.items);
+            
+            // Get 3 random products from the flattened array
+            const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 3);
+            
+            setRecommendedProducts(selected);
+            setTitle(response.data.text.recommendation);
+            setLoading(false);
+        } catch (err) {
+            console.error('Error fetching recommendations:', err);
+            setError('Failed to fetch recommendations');
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchRecommendations();
     }, []);
 

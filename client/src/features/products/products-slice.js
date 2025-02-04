@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  items: [],
+  products: [], // Ganti items dengan products
   loading: false,
   error: "",
   search: "",
@@ -14,17 +14,17 @@ export const productSlice = createSlice({
   reducers: {
     fetchPending(state) {
       state.loading = true;
-      state.items = [];
+      state.products = []; // Ganti items dengan products
       state.error = "";
     },
     fetchSuccess(state, action) {
       state.loading = false;
-      state.items = action.payload;
+      state.products = action.payload; // Ganti items dengan products
       state.error = "";
     },
     fetchReject(state, action) {
       state.loading = false;
-      state.items = [];
+      state.products = []; // Ganti items dengan products
       state.error = action.payload;
     },
     setSearch(state, action) {
@@ -40,10 +40,7 @@ export const fetchProducts = () => async (dispatch) => {
   try {
     dispatch(fetchPending());
 
-    const { data } = await axios({
-      method: "GET",
-      url: 'https://firmanz.tech/products',
-    });
+    const { data } = await axios.get("http://localhost:3000/products");
 
     dispatch(fetchSuccess(data.product));
   } catch (error) {

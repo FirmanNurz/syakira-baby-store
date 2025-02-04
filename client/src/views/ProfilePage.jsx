@@ -19,7 +19,7 @@ export default function ProfilePage() {
                     return;
                 }
 
-                const { data } = await axios.get('https://firmanz.tech/user/profile', {
+                const { data } = await axios.get('http://localhost:3000/user/profile', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -60,7 +60,7 @@ export default function ProfilePage() {
             }
 
             const { data } = await axios.patch(
-                'https://firmanz.tech/user/update-image', 
+                'http://localhost:3000/user/update-image', 
                 formData, 
                 {
                     headers: { 
